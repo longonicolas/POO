@@ -6,7 +6,7 @@ object verdurin{
 	method carga() = cajones * 50
 	
 	method obtenerVelocidad(){
-		return 80 - (1 * (self.carga() / 500))
+		return 80 - (self.carga() / 500)
 	}
 	
 	method peaje(kilometros,velocidad){
@@ -48,10 +48,18 @@ object verdurin{
  	
  	method peaje(kilometros,velocidad){
  		
- 		deterioro += velocidad - 45
+ 		deterioro += 0.max(velocidad - 45)
+ 		
+ 		//otra forma de delimitar el minimo (=0) :
+ 		
+ 		/*deterioro += velocidad - 45
  		
  		if(deterioro < 0)
- 		deterioro = 0
+ 		deterioro = 0*/
+ 		
+ 		
+ 		
+ 		
  	}
  	
  }
