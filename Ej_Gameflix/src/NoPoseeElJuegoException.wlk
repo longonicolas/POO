@@ -1,0 +1,4 @@
+class NoPoseeElJuegoException inherits Exception{
+	
+	
+}
