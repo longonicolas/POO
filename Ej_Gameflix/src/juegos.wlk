@@ -3,7 +3,6 @@ class Juego{
 	const nombre
 	const categoria
 	var precio
-	var cantidadHorasJugadas
 	
 	method categoria() = categoria
 	method nombre() = nombre
@@ -16,8 +15,41 @@ class Juego{
 		return nombre == unNombre
 	}
 	
+	method jugar(jugador,horasJugadas)
+	
 }
 
-/*const godOfWar = new Juego(nombre = "God", categoria = "Accion", precio = 200)
-const DBZBTK3 = new Juego(nombre = "Budokai", categoria = "Lucha", precio = 200)
-const gtaSa = new Juego(nombre = "GTA Sa", categoria = "Mundo Abierto", precio = 200)*/
+class JuegoViolento inherits Juego{
+	
+	override method jugar(jugador,horasJugadas){
+		jugador.reducirHumor(10,horasJugadas)
+	}
+}
+
+class JuegoMOBA inherits Juego{
+	
+	override method jugar(jugador,horasJugadas){
+		jugador.comprarSkins(30)
+	}
+}
+
+class JuegoTerror inherits Juego{
+	
+	override method jugar(jugador,horasJugadas){
+		jugador.suscripcionInfantil()
+	}	
+}
+
+class JuegoEstrategico inherits Juego{
+
+	override method jugar(jugador,horasJugadas){
+		jugador.aumentarHumor(5,horasJugadas)
+	}	
+	
+}
+
+
+
+const godOfWar = new JuegoViolento(nombre = "God", categoria = "Base", precio = 200)
+const DBZBTK3 = new JuegoViolento(nombre = "Budokai", categoria = "Lucha", precio = 200)
+const gtaSa = new JuegoMOBA(nombre = "GTA Sa", categoria = "Mundo Abierto", precio = 200)

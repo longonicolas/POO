@@ -1,4 +1,5 @@
 import suscripcion.*
+import juegos.*
 import NoPoseeElJuegoException.NoPoseeElJuegoException
 
 class Usuario {
@@ -28,12 +29,12 @@ class Usuario {
 		return unJuego.cantidadHorasJugadas()
 	}
 	
-	method reducirHumor(unidades,cantidadHorasJugadas){
-		humor -= unidades * cantidadHorasJugadas
+	method reducirHumor(unidades,horasJugadas){
+		humor -= unidades * horasJugadas
 	}
 	
-	method aumentarHumor(unidades,cantidadHorasJugadas){
-		humor += unidades * cantidadHorasJugadas
+	method aumentarHumor(unidades,horasJugadas){
+		humor += unidades * horasJugadas
 	}	
 	
 	method comprarSkins(precio){
@@ -44,21 +45,9 @@ class Usuario {
 		suscripcion = infantil
 	}
 	
-	method jugarJuego(unJuego){
+	method jugarJuego(unJuego,horasJugadas){
 		if(suscripcion.permiteJugar(unJuego)){
-			if(unJuego.categoria() == "Violencia"){
-				self.reducirHumor(10,self.cantidadHorasJugadas(unJuego))
-			}
-			else if(unJuego.categoria() == "MOBA" ){
-				self.comprarSkins(30)
-			}
-			else if(unJuego.categoria() == "Terror"){
-				self.suscripcionInfantil()
-			}
-			else if(unJuego.categoria() == "Estrategia"){
-				self.aumentarHumor(5,self.cantidadHorasJugadas(unJuego))
-			}
-			
+			unJuego.jugar(self,horasJugadas)
 		}
 		else{
 			throw new NoPoseeElJuegoException(message = "Juego no incluido en suscripcion")
@@ -67,4 +56,6 @@ class Usuario {
 	
 }
 
-//const usuario1 = new Usuario(suscripcion = base, dineroEnCuenta = 10)
+object usuario1 inherits Usuario(suscripcion = base, dineroEnCuenta = 50, humor = 100){
+	
+}
