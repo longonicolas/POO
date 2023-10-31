@@ -32,4 +32,11 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.uqbar.project.wollok.wollokNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>TP_Atomico</name>
+			<type>2</type>
+			<location>C:/Users/m4uro/Desktop/PDEP/Objetos/wollok-win32.win32.x86_64/workspace/TP_Atomico</location>
+		</link>
+	</linkedResources>
 </projectDescription>
