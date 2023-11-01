@@ -1,0 +1,23 @@
+@startuml 
+
+abstract class Vikingo{
+    
+    casta
+    
+    serProductivo()
+}
+
+class Soldado{
+
+    homicidios
+    tieneArma
+}
+
+class Granjero{
+
+}
+
+
+
+
+@enduml

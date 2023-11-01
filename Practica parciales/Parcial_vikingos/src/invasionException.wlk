@@ -1,0 +1,4 @@
+class NoPuedeIrDeInvasionException inherits Exception {
+	
+	
+}
