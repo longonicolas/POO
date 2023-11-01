@@ -5,7 +5,6 @@ class Casta {
 	
 	const claseSiguiente
 	
-	
 	method tienePermitidoExpedicionar(unVikingo)
 	
 	method subirDeCasta(unVikingo){
@@ -18,8 +17,6 @@ object jarl inherits Casta(claseSiguiente = karl){
 	override method tienePermitidoExpedicionar(unVikingo){
 		return unVikingo.armas() < 1
 	}
-	
-
 }
 
 object karl inherits Casta(claseSiguiente = thrall){

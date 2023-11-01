@@ -1,58 +1,83 @@
-import invasionException.*
+import expedicionException.*
 
-class Invasion{
+class Expedicion{
 	
 	const vikingosInvasores = []
+	var invasiones = #{}
+	var botinTotal
 	
-	method subirVikingoAInvasion(unVikingo){
+	method subirVikingoAExpedicion(unVikingo){ //ok
 		if(unVikingo.puedeIrDeExpedicion()){
 			vikingosInvasores.add(unVikingo)
 		}
 		else{
-			throw new NoPuedeIrDeInvasionException(message = "no cumple requisitos para ir a invadir")
+			throw new NoPuedeIrDeExpedicionException(message = "no cumple requisitos para ir a invadir")
 		}
 	}
-}
-
-
-class InvasionCapital inherits Invasion {
 	
-	const riquezaDelSuelo
-	
-	method botin(){
-		return self.defensoresDerrotados() * riquezaDelSuelo
-	}
-	
-	method defensoresDerrotados(){
+	method cantidadDeVikingos(){ //ok
 		return vikingosInvasores.size()
 	}
 	
-	method valeLaPena(){
-		return self.botin() * self.defensoresDerrotados() >= 3 * self.defensoresDerrotados()
+	method valeLaPena(){ //ok
+		invasiones.all({invasion => invasion.valeLaPena(self.cantidadDeVikingos())})
 	}
+	
+	method dividirBotin(){
+		return botinTotal / self.cantidadDeVikingos()
+	}
+	
+	method realizarExpedicion(){
+		botinTotal += invasiones.sum({invasion => invasion.serInvadida()})
+		vikingosInvasores.forEach({unVikingo => unVikingo.recibirBotin(self.dividirBotin())})
+	}
+	
 	
 }
 
-class InvasionAldea inherits Invasion {
+class Lugar{
+	
+	method botin(cantidadDeVikingos)
+	method valeLaPena(cantidadDeVikingos)
+	
+	method serInvadido(cantidadDeVikingos){
+		return self.botin(cantidadDeVikingos)
+	}
+}
+
+class InvasionCapital inherits Lugar{
+	
+	const riquezaDelSuelo
+	
+	override method botin(cantidadDeVikingos){
+		return cantidadDeVikingos * riquezaDelSuelo
+	}
+	
+	override method valeLaPena(cantidadDeVikingos){
+		return self.botin(cantidadDeVikingos) >= 3 * cantidadDeVikingos
+	}
+}
+
+class InvasionAldea inherits Lugar{
 	
 	const cantidadDeCrucifijos
 	
-	method botin(){
-		return 15
+	override method botin(cantidadDeVikingos){
+		return cantidadDeVikingos
 	}
 	
-	method valeLaPena(){
-		return self.botin() >= 15 && cantidadDeCrucifijos
+	override method valeLaPena(cantidadDeVikingos){
+		return self.botin(cantidadDeVikingos) >= 15 && cantidadDeCrucifijos
 	}
+	
+
 }
 
 class InvasionAldeaAmurallada inherits InvasionAldea {
 	
 	const cantidadMinimaDeGuerreros
 	
-	override method valeLaPena(){
-		return super() && vikingosInvasores.size() >= cantidadMinimaDeGuerreros
-		
-		
+	override method valeLaPena(cantidadDeVikingos){
+		return super(cantidadDeVikingos) && cantidadDeVikingos >= cantidadMinimaDeGuerreros
 	}
 }

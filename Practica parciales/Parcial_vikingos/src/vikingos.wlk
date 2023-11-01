@@ -4,17 +4,25 @@ class Vikingo{
 	
 	var casta
 	var armas
+	var dinero
 	
 	method armas() = armas
 	
-	method puedeIrDeExpedicion(){
+	method puedeIrDeExpedicion(){ //chequear
 		return self.esProductivo() && casta.tienePermitidoExpedicionar(self)
 	}
 	
-	method esProductivo()
-	method ascenderDeEscalaSocial(){
+	method esProductivo() //ok
+	
+	method ascenderDeEscalaSocial(){ //chequear
 		casta = casta.subirDeCasta(self)
 	}
+	
+	method recibirBotin(oro){ //ok
+		dinero += oro
+	}
+	
+	
 	
 }
 
