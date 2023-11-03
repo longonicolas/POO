@@ -1,0 +1,4 @@
+class FelicidadEnNegativoException inherits Exception {
+	
+	
+}
