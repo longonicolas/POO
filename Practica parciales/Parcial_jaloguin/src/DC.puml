@@ -1,0 +1,131 @@
+@startuml jaloguin
+
+class Ninie{
+    elementosPuestos
+    actitud
+    caramelos
+    estadoDeSalud = sano
+
+    caramelos()
+    elementosPuestos()
+    sustoDeElementos()
+    capacidadDeSusto()
+    asustar(unAdulto)
+    recibirCaramelos(cantidad)
+    tieneMasDeNCaramelos(N)
+    alimentarse(unosCaramelos)
+    digerirCaramelos(unosCaramelos)
+    disminuirActitud(cantidad)
+}
+
+abstract class Adulto{
+    niniosQueIntentaronAsustarlo
+
+    asustadoresConMuchosCaramelos()
+    tolerancia()
+    serAsustado(unNinie)
+    darCaramelos()
+}
+
+class AdultoComun {
+}
+
+class Anciano {
+
+}
+
+class AdultoNecio{
+    serAsustado(unNinie)
+}
+
+interface elemento{
+    cuantoAsusta()
+}
+
+object maquillaje{
+
+    nivelDeSusto = 3
+
+    --
+    cambiarNivelDeSusto(cantidad)
+}
+
+object traje{
+    personaje
+}
+
+abstract class Personaje{
+
+    nivelDeSusto()
+    nivelTipoDePersonaje
+}
+
+class PersonajeTierno{
+}
+
+class PersonajeTerrorifico{
+}
+
+class Legion{
+    miembros
+
+    capacidadDeSusto()
+    caramelos()
+    lider()
+    asustar(unAdulto)
+}
+
+class Barrio{
+
+    niniesDelBarrio
+
+    ordenarPorCaramelos(unosNinies)
+    losTresConMasCaramelosDelRrioba()
+    niniesConMuchosCaramelos(unosNinies)
+    elementosDeNinies(unosNinies)
+    elementosDeNiniosConMuchosCaramelos()
+}
+
+abstract class EstadoDeSalud{
+
+    estadoDeSaludSiguiente
+
+    repercutirse()
+    afectarCuerpo(unHumano)
+}
+
+object sano{
+
+}
+
+object empachado{
+
+}
+
+object enCama{
+
+    estadoDeSaludSiguiente = self
+
+    --
+    afectarCuerpo(unHumano)
+}
+
+PersonajeTierno -u-|> Personaje
+PersonajeTerrorifico -u-|> Personaje
+
+AdultoComun -u-|> Adulto
+Anciano -u-|> Adulto
+
+sano -u-|> EstadoDeSalud
+empachado -u-|> EstadoDeSalud
+
+
+traje -r-> Personaje
+
+Ninie -r-> "*" elemento : elementosPuestos
+
+traje .u.|> elemento
+maquillaje .u.|> elemento
+
+
+@enduml

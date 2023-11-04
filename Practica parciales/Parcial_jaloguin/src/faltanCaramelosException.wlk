@@ -1,0 +1,4 @@
+class FaltanCaramelosException inherits Exception{
+	
+	
+}
