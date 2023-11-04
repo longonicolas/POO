@@ -63,11 +63,11 @@ class InvasionAldea inherits Lugar{
 	const cantidadDeCrucifijos
 	
 	override method botin(cantidadDeVikingos){
-		return cantidadDeVikingos
+		return cantidadDeCrucifijos
 	}
 	
 	override method valeLaPena(cantidadDeVikingos){
-		return self.botin(cantidadDeVikingos) >= 15 && cantidadDeCrucifijos
+		return self.botin(cantidadDeVikingos) >= 15 
 	}
 	
 
