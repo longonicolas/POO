@@ -1,0 +1,9 @@
+@startuml impdep
+
+class Pelicula{
+
+    nombre
+    elenco
+}
+
+@enduml
