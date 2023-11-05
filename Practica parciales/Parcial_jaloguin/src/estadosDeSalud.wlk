@@ -7,6 +7,9 @@ class EstadoDeSalud {
 	}
 	
 	method afectarCuerpo(unHumano)
+	
+	method puedeSeguirComiendo(){
+	}
 }
 
 object sano inherits EstadoDeSalud(estadoDeSaludSiguiente = empachado){
@@ -24,10 +27,16 @@ object empachado inherits EstadoDeSalud(estadoDeSaludSiguiente = enCama){
 }
 
 object enCama{
-
-	const estadoDeSaludSiguiente = self	
+	
+	method repercutirse(){
+		return self
+	}
 	
 	method afectarCuerpo(unHumano){
 		unHumano.disminuirActitud(unHumano.actitud())
+	}
+	
+	method puedeSeguirComiendo(){
+		throw new Exception(message = "no mas candys")
 	}
 }

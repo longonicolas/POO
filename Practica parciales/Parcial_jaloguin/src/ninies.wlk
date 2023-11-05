@@ -1,5 +1,6 @@
 import faltanCaramelosException.*
 import estadosDeSalud.*
+import asustador.*
 
 class Ninie {
 	
@@ -20,11 +21,6 @@ class Ninie {
 	}
 	
 	method asustar(unAdulto){
-		/*const caramelosEntregados = unAdulto.serAsustado(self)
-		if(caramelosEntregados == 0){
-			throw new Exception(message = "no dio caramelos")
-		}
-		self.recibirCaramelos(caramelosEntregados)*/
 		
 		if(unAdulto.serAsustado(self)){
 			self.recibirCaramelos(unAdulto.darCaramelos(self))
@@ -36,21 +32,22 @@ class Ninie {
 	}
 	
 	method tieneMasDeNCaramelos(N){
-		return self.caramelos() > N
+		return caramelos > N
 	}
 	
 	method alimentarse(unosCaramelos){
 		
-		const nuevosCaramelos = caramelos - unosCaramelos
-		if(nuevosCaramelos < 0) throw new FaltanCaramelosException(message = "insuficientes caramelos")
+		if(caramelos < unosCaramelos) throw new FaltanCaramelosException(message = "insuficientes caramelos")
 		
-		caramelos -= unosCaramelos
 		self.digerirCaramelos(unosCaramelos)
+		caramelos -= unosCaramelos
+		
 	}
 	
 	method digerirCaramelos(unosCaramelos){
 		
 		if(unosCaramelos > 10){
+			estadoDeSalud.puedeSeguirComiendo()
 			estadoDeSalud = estadoDeSalud.repercutirse()
 			estadoDeSalud.afectarCuerpo(self)
 		}
@@ -61,3 +58,5 @@ class Ninie {
 	}
 
 }
+
+const ninio1 = new Ninie(actitud = 10, caramelos = 20)

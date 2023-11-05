@@ -38,7 +38,7 @@ class AdultoNecio{
     serAsustado(unNinie)
 }
 
-interface elemento{
+interface elementosPuestos{
     cuantoAsusta()
 }
 
@@ -86,28 +86,26 @@ class Barrio{
     elementosDeNiniosConMuchosCaramelos()
 }
 
-abstract class EstadoDeSalud{
-
-    estadoDeSaludSiguiente
+interface EstadoDeSalud{
 
     repercutirse()
     afectarCuerpo(unHumano)
+    puedeSeguirComiendo
+
+}
+
+abstract class EstadoDeSaludActivo{
+
+    estadoDeSaludSiguiente 
 }
 
 object sano{
-
 }
 
 object empachado{
-
 }
 
 object enCama{
-
-    estadoDeSaludSiguiente = self
-
-    --
-    afectarCuerpo(unHumano)
 }
 
 PersonajeTierno -u-|> Personaje
@@ -119,13 +117,25 @@ Anciano -u-|> Adulto
 sano -u-|> EstadoDeSalud
 empachado -u-|> EstadoDeSalud
 
+EstadoDeSaludActivo .u.|> EstadoDeSalud
+enCama .u.|> EstadoDeSaludActivo
+
 
 traje -r-> Personaje
 
-Ninie -r-> "*" elemento : elementosPuestos
+Ninie -r-> "*" elementosPuestos : elementosPuestos
+Ninie -r-> EstadoDeSalud
+Ninie ..> Adulto
+Ninie ..> AdultoNecio
 
-traje .u.|> elemento
-maquillaje .u.|> elemento
+Barrio -r-> "*" Ninie : niniesDelBarrio
+
+Legion -r-> "*" Ninie : miembros
+Legion ..> Adulto
+Legion ..> AdultoNecio
+
+traje .u.|> elementosPuestos
+maquillaje .u.|> elementosPuestos
 
 
 @enduml

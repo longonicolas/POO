@@ -3,7 +3,7 @@ class Legion {
 	const miembros = #{}
 	
 	method capacidadDeSusto(){
-		return miembros.map({unMiembro => unMiembro.capacidadDeSusto()}).sum()
+		return miembros.sum({unMiembro => unMiembro.capacidadDeSusto()})
 	}
 	
 	method caramelos(){
