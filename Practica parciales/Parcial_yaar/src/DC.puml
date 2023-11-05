@@ -1,0 +1,117 @@
+@startuml Yaar
+
+class Barco{
+
+    mision
+    capacidad
+    tripulantes
+
+    cantidadDeTripulantes()
+	tieneSuficienteTripulacion()
+	hayUnaLLaveDeCofre()
+    esVulnerableA(otroBarco)
+    barcoPasadoDeGrog()
+    puedeSerSaqueadoPor(unPirata)
+    hayEspacio()
+    puedeFormarParteDeLaTripulacion(unPirata)
+	subirAlBarco(unPirata)
+	cambiarDeMision(unaMision)
+	pirataMasEbrio()
+	todosBeben()
+	sePierdeElMasEbrio()
+    anclarEnCiudad(unaCiudad)
+	esBarcoTemible()
+	tripulantesPasadosDeGrog()
+	cantidadDePasadosDeGrog()
+	cantidadDeItemsDeTripulantesPasadosDeGrogSinRepetir()
+	ebrioConMasDinero()
+    cantidadDeTripulantesQueHaInvitado(unTripulante)
+    tripulanteQueMasInvito()
+}
+
+class Pirata{
+
+    items
+	nivelDeEbriedad
+	dinero
+	invitadoPor
+	
+	dinero()
+	nivelDeEbriedad()
+	items()
+	invitadoPor()
+	esUtilPara(unaMision)
+	tiene(unItem)
+	cantidadDeItems()
+	estaPasadoDeGrog()
+	seAnimaASaquear(unObjetivo)
+	tragoDeGrog()
+	itemsDistintos()
+	meInvitoEl(unTripulante)
+}
+
+class PirataEspia{
+
+}
+
+abstract class Mision{
+
+    puedeSerCompletadaPor(unBarco)
+	{abstract} sirveParaMision(unPirata)
+
+}
+
+class BusquedaDelTesoro{
+
+    tieneAlgunElemento(unPirata)
+}
+
+class ConvertirseEnLeyenda{
+
+    itemObligatorio
+
+}
+
+class Saqueo{
+
+    objetivo
+	dineroEstablecido
+
+    cambiarDineroEstablecido(cantidad)
+}
+
+class CiudadCostera{
+
+    habitantes
+
+    esVulnerableA(unBarco)
+	laCiudadEstaEnProblemas(unBarco)
+	puedeSerSaqueadoPor(unPirata)
+	sumarHabitante()
+}
+
+interface Objetivo{
+
+    esVulnerableA(unBarco)
+    puedeSerSaqueadoPor(unPirata)
+}
+
+BusquedaDelTesoro -u-|> Mision
+ConvertirseEnLeyenda -u-|> Mision
+
+
+PirataEspia -u-|> Pirata
+
+CiudadCostera .u.|> Objetivo
+
+Saqueo -u-|> Mision
+Saqueo -r-> Objetivo
+
+Barco -r-> Mision
+Barco -r-> "*" Pirata : tripulantes
+Barco .u.|> Objetivo
+
+Pirata ..> Objetivo
+Pirata ..> Mision
+
+@enduml
