@@ -1,0 +1,90 @@
+@startuml escape
+
+
+abstract class Sala{
+
+    nombre
+    dificultad
+
+    precio()
+    esSalaDificil()
+    {abstract} extra()
+}
+
+class SalaDeAnime{
+
+}
+
+class SalaDeHistoria{
+
+    esBasadaEnHechosReales
+}
+
+class SalaDeTerror{
+
+    sustos
+
+    haySuficientesSustos()
+}
+
+class Escapista{
+    maestria
+	salasDeLasQueSalio
+	saldo
+	
+	saldo()
+	puedeEscaparDe(unaSala)
+	cantidadDeSalasDeLasQueSalio()
+	hizoMuchasSalas()
+	subirDeMaestria()
+	nombreDeSalas(unasSalas)
+	nombreDeSalasDeLasQueSalio()
+	agregarSala(unaSala)
+	puedePagar(unMonto)
+	pagar(unPrecio)
+}
+
+interface Maestria{
+
+    lePermiteEscapar(unaSala,unEscapista)
+    ascenderAEscapista(unEscapista)
+}
+
+object amateur{
+
+}
+
+object profesional{
+
+}
+
+class Grupo{
+
+    integrantes
+	
+	puedeEscaparDeSala(unaSala)
+	escapar(unaSala)
+	pagoDeSala(unPrecio)
+	montoPorPersona(montoSala)
+	dineroTotalDeIntegrantes(unosIntegrantes)
+	integrantesQuePuedenPagar(montoDividido)
+	elGrupoPuedePagar(montoSala)
+	todosLosIntegrantesPuedenPagar(montoSala)
+	puedenPagar(montoSala)
+}
+
+SalaDeAnime -u-|> Sala
+SalaDeHistoria -u-|> Sala
+SalaDeTerror -u-|> Sala
+
+Escapista -r-> "*" Sala : salasDeLasQueSalio
+Escapista -r-> Maestria
+
+amateur .u.|> Maestria
+profesional .u.|> Maestria
+
+Grupo -r-> "*" Escapista : integrantes
+Grupo ..> Sala
+
+
+@enduml
