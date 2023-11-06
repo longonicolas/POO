@@ -81,4 +81,5 @@ class PeliculaDeTerror inherits Pelicula{
 
 class PeliculaDeComedia inherits Pelicula{
 	
+	
 }
